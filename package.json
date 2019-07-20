@@ -1,0 +1,27 @@
+{
+  "name": "basicradis",
+  "version": "1.0.0",
+  "description": "TaskManager webApp with redis.",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ripu502/BasicRadis.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ripu502/BasicRadis/issues"
+  },
+  "homepage": "https://github.com/ripu502/BasicRadis#readme",
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "ejs": "^2.6.2",
+    "express": "^4.17.1",
+    "redis": "^2.8.0"
+  }
+}
