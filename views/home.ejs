@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Task Manager</title>
 </head>
+
 <body>
     <h1>Task Manager WebApp</h1>
+
+    <h3> Adding tasks</h3>
+    <form method="POST" action="/add/task">
+        Task name: <input type="text" name="task" placeholder="Which you need you perform"><br>
+        <input type="submit" value="Add the task">
+    </form>
+
+
+    <h3>My Tasks</h3>
     <ul>
-            <% tasks.forEach(function(task) { %>
-                <li> <%= task%> </li>
-                <% }) %>
+        <% tasks.forEach(function(task) { %>
+        <li> <%= task%> </li>
+        <% }) %>
     </ul>
 </body>
+
 </html>
