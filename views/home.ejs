@@ -10,26 +10,45 @@
 
 <body>
     <h1>Task Manager WebApp</h1>
-
+    <hr>
     <h3> Adding tasks</h3>
     <form method="POST" action="/add/task">
         Task name: <input type="text" name="task" placeholder="Which you need you perform"><br>
         <br>
         <input type="submit" value="Add the task">
     </form>
-
+    <hr>
 
     <h3>My Tasks</h3>
     <form action="/delete/task" method="post">
-    
+        <% if (tasks.length > 0) {%>
         <% tasks.forEach(function(task) { %>
-            <span>
-            <input type="checkbox" name="tasks" value="<%= task%>">  <%= task%>  <br>
-            </span>
-        <% }) %>
+        <span>
+            <input type="checkbox" name="tasks" value="<%= task%>"> <%= task%> <br>
+        </span>
         <br>
+        <% }) %>
         <input type="submit" value="Done Delete Selected">
-    </form>
+        <% } else {%>
+        <h4>No tasks Please add tasks to see here</h4>
+        <%}%>
+        </form>
+
+<hr>
+        <h3>Call details</h3>
+        <b>Client Name: </b> <%= call.name%> <br>
+        <b>Client Email: </b> <%= call.email%> <br>
+        <b>Client PhoneNo: </b> <%= call.phone%> <br>
+
+
+        <hr>
+        <h3>Next Call Detailer</h3>
+        <form action="/add/call" method="post">
+            Name: <input type="text" name="name" id=""><br> <br>
+            Email: <input type="email" name="email" id=""><br> <br>
+            PhoneNo.: <input type="tel" name="phone" id=""><br> <br>
+            <input type="submit" value="Schedule for Next Call" id="">
+        </form>
 </body>
 
 </html>

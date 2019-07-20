@@ -10,9 +10,17 @@ module.exports.home = (req, res, next) => {
         if (err) {
             console.log(`some error occured in home ${err}`);
         } else {
+            client.hgetall("call", function (err, call) {
+                if (err) {
+                    console.log(`some err in hgetall ${err}`)
+                } else {
 
-            res.render('home', {
-                tasks: reply
+                    // console.dir(obj);
+                    res.render('home', {
+                        tasks: reply,
+                        call: call
+                    });
+                }
             });
         }
     })
@@ -46,9 +54,9 @@ module.exports.deleteTask = (req, res, next) => {
             for (let i = 0; i < reply.length; i++) {
                 if (tasks.indexOf(reply[i]) > -1) {
                     client.lrem('tasks', 0, reply[i], (err, reply) => {
-                        if(err){
+                        if (err) {
                             console.log('some error occured in lrem');
-                        }else {
+                        } else {
                             console.log('Deleting is done');
                         }
                     })
@@ -57,5 +65,19 @@ module.exports.deleteTask = (req, res, next) => {
         }
 
     })
+    res.redirect('/');
+};
+
+
+module.exports.addCall = (req, res, next) => {
+    const { name, email, phone } = req.body;
+    console.log(`${name} ${email} ${phone}`);
+    client.hmset("call", "name", name, "email", email, "phone", phone, (err, reply)=>{
+        if(err){
+            console.log(`some err occured in hmset ${err}`);
+        }else {
+            console.log('Next call Scheduled');
+        }
+    });
     res.redirect('/');
 };
