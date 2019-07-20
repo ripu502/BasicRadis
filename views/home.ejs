@@ -14,16 +14,22 @@
     <h3> Adding tasks</h3>
     <form method="POST" action="/add/task">
         Task name: <input type="text" name="task" placeholder="Which you need you perform"><br>
+        <br>
         <input type="submit" value="Add the task">
     </form>
 
 
     <h3>My Tasks</h3>
-    <ul>
+    <form action="/delete/task" method="post">
+    
         <% tasks.forEach(function(task) { %>
-        <li> <%= task%> </li>
+            <span>
+            <input type="checkbox" name="tasks" value="<%= task%>">  <%= task%>  <br>
+            </span>
         <% }) %>
-    </ul>
+        <br>
+        <input type="submit" value="Done Delete Selected">
+    </form>
 </body>
 
 </html>

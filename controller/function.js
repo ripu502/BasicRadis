@@ -28,8 +28,32 @@ module.exports.addTask = (req, res, next) => {
     client.rpush('tasks', task, (err, reply) => {
         if (err) {
             console.log(`some err is occured in addTask ${err}`);
-        }else{
+        } else {
             console.log('task is added to Redis');
+        }
+
+    })
+    res.redirect('/');
+};
+
+module.exports.deleteTask = (req, res, next) => {
+    const tasks = req.body.tasks;
+    console.log(tasks);
+    client.lrange('tasks', 0, -1, (err, reply) => {
+        if (err) {
+            console.log(`some err is occured in deleteTask ${err}`);
+        } else {
+            for (let i = 0; i < reply.length; i++) {
+                if (tasks.indexOf(reply[i]) > -1) {
+                    client.lrem('tasks', 0, reply[i], (err, reply) => {
+                        if(err){
+                            console.log('some error occured in lrem');
+                        }else {
+                            console.log('Deleting is done');
+                        }
+                    })
+                }
+            }
         }
 
     })
